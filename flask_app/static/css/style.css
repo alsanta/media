@@ -1,0 +1,110 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+header{
+    background-color: purple;
+}
+
+body{
+    background-color: white;
+}
+
+#center{
+    background-color: teal;
+    width: 70%;
+    margin: 0 auto;
+    min-height: 94vh;
+}
+
+.main{
+    padding: 20px;
+}
+
+.subBtn{
+    background-color: teal;
+    color: white;
+    padding: 2px 4px;
+}
+
+#search_bar{
+    width: 300px;
+}
+
+.add_movie{
+    margin: 0 auto;
+    width: 70%;
+}
+
+.media_name_input{
+    width: 300px;
+}
+
+.rating{
+    width: 60px;
+}
+
+.select_value{
+    height: 25px;
+}
+
+.reviewBtn{
+    width: 80px;
+}
+
+.my_movie_rating{
+    width: 150px;
+}
+
+.single_media{
+    width: 150px;
+    height: 200px;
+    background-color: white;
+    overflow: auto;
+    border-radius: 15px;
+}
+
+.movies{
+    flex-wrap: wrap;
+}
+
+.left_review{
+    flex: 2;
+}
+.right_review{
+    flex: 1;
+}
+
+.poster_container{
+    width: 200px;
+    text-align: center;
+}
+
+.poster_container :hover{
+    transform: scale(1.05);
+    transition: .3s;
+}
+
+.media_action{
+}
+
+#nav_panel{
+    background-color: purple;
+    height: 300px;
+    width: 150px;
+    position: fixed;
+    margin-top: 100px;
+    margin-left: 70px;
+    border-radius: 15px;
+    
+}
+
+a {
+    color: white;
+}
+
+.single_poster{
+    border-radius: 15px;
+}

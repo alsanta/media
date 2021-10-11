@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEdia</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <header class='d-flex justify-content-between align-items-center'>
+        <h1 class='ms-2 text-white'>Welcome {{session['first_name']}}</h1>
+        <form action="/search">
+            <input id='search_bar' type="search">
+            <input type="submit" class='subBtn' value='Search'>
+        </form>
+        <div class="user_profile me-2">
+            <a class='text-white' href="/myprofile/{{session['user_id']}}">My Profile</a> |
+            <a class='text-white' href="/logout">Logout</a>
+        </div>
+    </header>
+    <div id="main_body" class='d-flex'>
+        <div id="nav_panel" class="d-flex flex-column align-items-center">
+            <a class='text-decoration-none fs-1' href="/dashboard">Home</a>
+            <a class='text-decoration-none fs-3' href="#">Movies</a>
+            <a class='text-decoration-none fs-3' href="#">Books</a>
+            <a class='text-decoration-none fs-3' href="#">Anime</a>
+        </div>
+        <div id="center" class="p-5">
+            <div class="movies">
+                <h3 class='mb-5'>{{single_review.movie.name}}</h3>
+                <p>Description:</p>
+                <p>{{single_review.movie.description}}</p>
+            </div>
+            <form action="/update/{{single_review.user_id}}/{{single_review.movie_id}}" class='d-flex flex-column'
+                method='POST'>
+                <div class="movie_rating">
+                    <label for="rating">Rating:</label>
+                    <select class='select_value mt-2 mb-2' name="rating" id="">
+                        <option value="1">1-Awful</option>
+                        <option value="2">2-Bad</option>
+                        <option value="3">3-Decent</option>
+                        <option value="4">4-Good</option>
+                        <option value="5">5-Amazing</option>
+                    </select> /5
+                </div>
+                <label for="reason">Comments:</label>
+                <textarea name="reason" id="" cols="30" rows="10">{{single_review.reason}}</textarea>
+                <input type="submit" class='subBtn mt-3 reviewBtn' value='Edit'>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

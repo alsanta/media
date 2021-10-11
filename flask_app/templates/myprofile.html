@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEdia</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <header class='d-flex justify-content-between align-items-center'>
+        <h1 class='ms-2 text-white'>{{session['first_name']}}</h1>
+        <form action="/search">
+            <input id='search_bar' type="search">
+            <input type="submit" class='subBtn' value='Search'>
+        </form>
+        <div class="user_profile me-2">
+            <a class='text-white' href="/logout">Logout</a>
+        </div>
+    </header>
+    <div id="main_body">
+        <div id="nav_panel" class="d-flex flex-column align-items-center">
+            <a class='text-decoration-none fs-1' href="/dashboard">Home</a>
+            <a class='text-decoration-none fs-3' href="#">Movies</a>
+            <a class='text-decoration-none fs-3' href="#">Books</a>
+            <a class='text-decoration-none fs-3' href="#">Anime</a>
+        </div>
+        <div id="center" class="p-5">
+            <div class="add_movie d-flex justify-content-between align-items-center mb-3">
+                <h1>Movies</h1>
+            </div>
+            <div class="movies d-flex gap-5">
+                {%for review in all_reviews%}
+                <div class="single_media border border-dark">
+                    <h5 class="text-center mb-3">{{review.movie.name}} {{review.rating}}/5</h5>
+                    <p class='ms-2'>{{review.reason}}</p>
+                    <a class='ms-2' href="/edit/{{review.user_id}}/{{review.movie_id}}">Edit</a> | <a
+                        href="/delete/{{review.user_id}}/{{review.movie_id}}">Delete</a>
+                </div>
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

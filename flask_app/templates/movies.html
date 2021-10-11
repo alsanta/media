@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEdia</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <header class='d-flex justify-content-between align-items-center'>
+        <h1 class='ms-2 text-white'>{{session['first_name']}}</h1>
+        <form action="/search" method='POST'>
+            <input id='search_bar' name='search' type="search">
+            <input type="submit" class='subBtn' value='Search'>
+        </form>
+        <div class="user_profile me-2">
+            <a class='text-white' href="/myprofile/{{session['user_id']}}">My Profile</a> |
+            <a class='text-white' href="/logout">Logout</a>
+        </div>
+    </header>
+    <div id="main_body" class='d-flex'>
+        <div id="nav_panel" class="d-flex flex-column align-items-center">
+            <a class='text-decoration-none fs-1' href="/dashboard">Home</a>
+            <a class='text-decoration-none fs-3' href="#">Movies</a>
+            <a class='text-decoration-none fs-3' href="#">Books</a>
+            <a class='text-decoration-none fs-3' href="#">Anime</a>
+        </div>
+        <div id="center" class="p-5">
+            <h1 class='mb-3'>Movies</h1>
+            <div class="movies d-flex">
+                {% for item in movie_list %}
+                <div class="poster_container d-flex flex-column justify-content-between mb-5">
+                    <div class="poster_name">
+                        <img class ='single_poster' height=150px width=100px src="{{item.poster}}" alt="{{item.name}} poster">
+                        <h5 class="">{{item.name}}</h5>
+                    </div>
+                    <div class="media_action">
+                        <a href="/view/{{item.id}}">Veiw</a>
+                    </div>
+                </div>
+                {%endfor%}
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
