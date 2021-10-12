@@ -32,8 +32,8 @@
         <div id="nav_panel" class="d-flex flex-column align-items-center">
             <a class='text-decoration-none fs-1' href="/dashboard">Home</a>
             <a class='text-decoration-none fs-3' href="/movies">Movies</a>
-            <a class='text-decoration-none fs-3' href="#">Books</a>
-            <a class='text-decoration-none fs-3' href="#">Anime</a>
+            <a class='text-decoration-none fs-3' href="/books">Books</a>
+            <a class='text-decoration-none fs-3' href="/animes">Anime</a>
         </div>
         <div id="center" class="p-5">
             <div class="movie_header d-flex justify-content-between align-items-center">
@@ -51,8 +51,22 @@
                 {%endfor%}
             </div>
             <div class="anime_header d-flex justify-content-between align-items-center">
+                <h1 class='text-center mb-3'>Books</h1>
+                <a class='' href="/books">All books</a>
+            </div>
+            <div class="books d-flex">
+                {% for item in book_list[:6]%}
+                <div class="poster_container d-flex flex-column justify-content-between mb-5">
+                    <a class='' href="/view/{{item.id}}"> <img class='single_poster' height=150px width=100px
+                            src="{{item.poster}}" alt="{{item.name}} poster">
+                        <p>{{item.name}}</p>
+                    </a>
+                </div>
+                {%endfor%}
+            </div>
+            <div class="anime_header d-flex justify-content-between align-items-center">
                 <h1 class='text-center mb-3'>Anime</h1>
-                <a class='' href="/anime">All anime</a>
+                <a class='' href="/animes">All anime</a>
             </div>
             <div class="animes d-flex">
                 {% for item in anime_list[:6]%}

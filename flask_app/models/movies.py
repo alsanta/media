@@ -67,6 +67,20 @@ class Movie():
         return movie_list
 
     @classmethod
+    def get_all_books(cls):
+        query = 'SELECT * FROM movies WHERE media = "book";'
+
+        results = connectToMySQL('media_schema').query_db(query)
+
+        movie_list = []
+
+        for single_movie in results:
+            x = cls(single_movie)
+            movie_list.append(x)
+
+        return movie_list
+
+    @classmethod
     def get_movie_by_id(cls,data):
         query = 'SELECT * FROM movies WHERE id = %(id)s'
 

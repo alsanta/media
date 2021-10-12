@@ -1,3 +1,4 @@
+from bs4 import BeautifulSoup
 from flask_app import app
 from flask import render_template, redirect, session, request,flash,jsonify
 from flask_app.models.movies import Movie
@@ -17,7 +18,8 @@ def index():
         return redirect('/')
     movie_list = Movie.get_all_movies()
     anime_list = Movie.get_all_animes()
-    return render_template('dashboard.html', movie_list = movie_list, anime_list = anime_list)
+    book_list = Movie.get_all_books()
+    return render_template('dashboard.html', movie_list = movie_list, anime_list = anime_list, book_list = book_list)
 
 @app.route('/movies')
 def movie_index():
@@ -26,6 +28,22 @@ def movie_index():
         return redirect('/')
     movie_list = Movie.get_all_movies()
     return render_template('movies.html', movie_list = movie_list)
+
+@app.route('/books')
+def books():
+    if 'user_id' not in session:
+        flash('Please log in to see this page.')
+        return redirect('/')
+    book_list = Movie.get_all_books()
+    return render_template('books.html', book_list = book_list)
+
+@app.route('/animes')
+def anime():
+    if 'user_id' not in session:
+        flash('Please log in to see this page.')
+        return redirect('/')
+    anime_list = Movie.get_all_animes()
+    return render_template('anime.html', anime_list = anime_list)
 
 @app.route('/myprofile/<int:id>')
 def myprofile(id):
@@ -186,6 +204,22 @@ def search_imdb():
         session['media'] = type
 
         check = Movie.get_movie_by_name({'name':response['results'][0]['title']})
+        if len(check) == 0:
+            return redirect ('/results')
+        return redirect(f'/review/{check[0].id}')
+
+    if type == 'book':
+
+        response = requests.get(f"https://www.thriftbooks.com/browse/?b.search={request.form['search']}#b.s=mostPopular-desc&b.p=1&b.pp=30&b.oos&b.tile").text
+        soup = BeautifulSoup(response, 'lxml')
+        book = soup.find('div', class_='AllEditionsItem-tile Recipe-default')
+        
+        session['poster'] = book.find('img')['src']
+        session['movie_name'] = book.find('div', class_='AllEditionsItem-tileTitle').text
+        session['plot'] = book.find('div', class_='AllEditionsItem-tileTitle').text
+        session['media'] = type
+
+        check = Movie.get_movie_by_name({'name':session['movie_name']})
         if len(check) == 0:
             return redirect ('/results')
         return redirect(f'/review/{check[0].id}')

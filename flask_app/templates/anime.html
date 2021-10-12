@@ -13,7 +13,7 @@
 
 <body>
     <header class='d-flex justify-content-between align-items-center'>
-        <h1 class='ms-2 text-white'>Movies</h1>
+        <h1 class='ms-2 text-white'>Anime</h1>
         <form action="/search" method='POST'>
             <select name="media_type" id="">
                 <option value="movie">Movies</option>
@@ -36,9 +36,9 @@
             <a class='text-decoration-none fs-3' href="/animes">Anime</a>
         </div>
         <div id="center" class="p-5">
-            <h1 class='mb-3'>Movies</h1>
+            <h1 class='mb-3'>Anime</h1>
             <div class="movies d-flex">
-                {% for item in movie_list %}
+                {% for item in anime_list %}
                 <div class="poster_container d-flex flex-column justify-content-between mb-5">
                     <div class="poster_name">
                         <img class ='single_poster' height=150px width=100px src="{{item.poster}}" alt="{{item.name}} poster">
